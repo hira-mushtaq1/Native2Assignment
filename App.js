@@ -8,7 +8,7 @@ function App() {
   return (
     <>
       {/* <Login1 /> */}
-      <ToDo />
+      {/* <ToDo /> */}
       <SignUp />
       {/* <Home /> */}
     </>

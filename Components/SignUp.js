@@ -38,7 +38,14 @@ export default function SignUp() {
             height: '80%',
           }}>
           <View style={{paddingTop: 50}}>
-            <Text style={styles.Title}>Enter Email: </Text>
+            <Text style={styles.Title}>Enter Your Name: </Text>
+            <View style={styles.shadow}>
+              <TextInput
+                style={styles.txtField}
+                placeholder="Type Email Here"
+              />
+            </View>
+            <Text style={styles.Title}>Enter Your Email</Text>
             <View style={styles.shadow}>
               <TextInput
                 style={styles.txtField}
@@ -46,7 +53,7 @@ export default function SignUp() {
               />
             </View>
 
-            <Text style={styles.Title}>Enter Password: </Text>
+            <Text style={styles.Title}>Password</Text>
             <View style={styles.shadow}>
               <TextInput
                 style={styles.txtField}
