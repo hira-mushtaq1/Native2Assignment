@@ -5,12 +5,18 @@ import {
   StyleSheet,
   Text,
   TextInput,
+  TouchableOpacity
   View,
 } from 'react-native';
 import styles from '../GlobalStyling';
 import axios from 'axios';
+import stylesNew from '../Styling';
+import Icon from 'react-native-vector-icons/dist/MaterialIcons';
 
-export default function Home() {
+export default function Home({navigation}) {
+  let moveScreen = route => {
+    navigation.navigate(route);
+  };
   const [data, setData] = useState([]);
   const [filter, setfilter] = useState([]);
 
@@ -27,9 +33,12 @@ export default function Home() {
 
   return (
     <View style={{paddingBottom: 100, marginBottom: 25}}>
-      <Text style={styles.header}>Home</Text>
+      <Text style={styles.header}>
+        <Icon name="home" size={35} color="#ffff" />
+        Home{' '}
+      </Text>
 
-      <View style={[styles.ShadowLight, styleIn.Inputs]}>
+      <View style={[styles.ShadowLight, InternalStyles.Inputs]}>
         <Image
           source={{
             uri: 'https://openclipart.org/image/2400px/svg_to_png/213239/Search-icon.png',
@@ -39,71 +48,83 @@ export default function Home() {
         <TextInput
           placeholder="Search Here"
           placeholderTextColor={'black'}
-          style={styleIn.InputField}></TextInput>
+          style={InternalStyles.InputField}></TextInput>
       </View>
 
       <ScrollView>
-        {filter &&
-          filter.length > 0 &&
-          filter.map((e, i) => (
-            <View key={i} style={[styles.card, styles.ShadowLight]}>
-              <Image
-                source={{uri: `${e.image}`}}
-                style={{
-                  width: '50%',
-                  height: 200,
-                  resizeMode: 'contain',
-                  alignSelf: 'center',
-                }}
-              />
+        <TouchableOpacity>
+          {filter &&
+            filter.length > 0 &&
+            filter.map((e, i) => (
+              <View key={i} style={[styles.card, styles.ShadowLight]}>
+                <Image
+                  source={{uri: `${e.image}`}}
+                  style={{
+                    width: '50%',
+                    height: 200,
+                    resizeMode: 'contain',
+                    alignSelf: 'center',
+                  }}
+                />
 
-              <Text
-                style={{
-                  fontWeight: 'bold',
-                  fontSize: 17,
-                  color: 'black',
-                }}>
-                Rs/- {e.price}
-              </Text>
-              <Text>{e.title}</Text>
-              <Text style={{fontWeight: 'bold'}}>{e.category}</Text>
-            </View>
-          ))}
+                <Text
+                  style={{
+                    fontWeight: 'bold',
+                    fontSize: 17,
+                    color: 'black',
+                  }}>
+                  Rs/- {e.price}
+                </Text>
+                <Text>{e.title}</Text>
+                <Text style={{fontWeight: 'bold'}}>{e.category}</Text>
+              </View>
+            ))}
+        </TouchableOpacity>
       </ScrollView>
 
       <ScrollView>
-        {data &&
-          data.length > 0 &&
-          data.map((e, i) => (
-            <View key={i} style={[styles.card, styles.ShadowLight]}>
-              <Image
-                source={{uri: `${e.image}`}}
-                style={{
-                  width: '50%',
-                  height: 150,
-                  resizeMode: 'contain',
-                  alignSelf: 'center',
-                  marginBottom: 5,
-                  marginVertical: 15,
-                }}
-              />
-              <Text style={{fontWeight: 'bold', fontSize: 20, color: 'black'}}>
-                Rs.{e.price}
-              </Text>
-              <Text style={{color: 'black', fontSize: 10, fontWeight: 'bold'}}>
-                {e.title}
-              </Text>
-              <Text style={{fontWeight: 'bold', color: 'black'}}>
-                {e.category}
-              </Text>
-            </View>
-          ))}
+        <TouchableOpacity>
+          <View
+            style={{
+              flexWrap: 'wrap',
+              flexDirection: 'row',
+            }}>
+            {data &&
+              data.length > 0 &&
+              data.map((e, i) => (
+                <View key={i} style={[styles.card, styles.ShadowLight]}>
+                  <Image
+                    source={{uri: `${e.image}`}}
+                    style={{
+                      width: '50%',
+                      height: 150,
+                      resizeMode: 'contain',
+                      alignSelf: 'center',
+                      marginBottom: 5,
+                      marginVertical: 15,
+                    }}
+                  />
+                  <Text
+                    style={{fontWeight: 'bold', fontSize: 20, color: 'black'}}>
+                    Rs.{e.price}
+                  </Text>
+                  <Text
+                    style={{color: 'black', fontSize: 10, fontWeight: 'bold'}}>
+                    {e.title}
+                  </Text>
+                  <Text style={{fontWeight: 'bold', color: 'black'}}>
+                    {e.category}
+                  </Text>
+                </View>
+              ))}
+          </View>
+        </TouchableOpacity>
       </ScrollView>
     </View>
   );
 }
 
-const styleIn = StyleSheet.create({
+const InternalStyles = StyleSheet.create({
   Headings: {
     color: 'white',
     fontSize: 50,
